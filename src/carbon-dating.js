@@ -17,11 +17,23 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function dateSample(MODERN_ACTIVITY) {
+    //throw new NotImplementedError('Not implemented');
+    let result;
+    const HALF_LIFE_PERIOD = 5730;
+    const ISOTOP_IDENTIFY = 15;
+    const K = 0.693 / HALF_LIFE_PERIOD;
+
+    if (!Number(MODERN_ACTIVITY) || typeof MODERN_ACTIVITY !== 'string') {
+        result = false;
+    } else if (Number(MODERN_ACTIVITY) < 1 || Number(MODERN_ACTIVITY) > 15) {
+        result = false;
+    } else {
+        result = Math.ceil(Math.log(ISOTOP_IDENTIFY / MODERN_ACTIVITY) / K);
+    }
+    return result;
 }
 
 module.exports = {
-  dateSample
+    dateSample
 };
