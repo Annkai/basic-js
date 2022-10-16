@@ -5,25 +5,45 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 const chainMaker = {
+
+  mas: [],
+
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    //throw new NotImplementedError('Not implemented');
+    return chainMaker.mas.length;
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+
+  addLink(value) {
+    //throw new NotImplementedError('Not implemented');
+    chainMaker.mas.push(value);
+    return chainMaker;
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+
+  removeLink(position) {
+    //throw new NotImplementedError('Not implemented');
+    if(!Number.isInteger(position) || position < 1 || position > chainMaker.mas.length){
+      chainMaker.mas = [];
+      throw new Error("You can't remove incorrect link!");
+    } else {
+      chainMaker.mas.splice(position - 1, 1);
+    }
+    return chainMaker;
   },
+  
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    //throw new NotImplementedError('Not implemented');
+    chainMaker.mas.reverse();
+    return chainMaker;
   },
+
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+ //throw new NotImplementedError('Not implemented');
+ let result = [];
+ for (let i = 0; i < chainMaker.mas.length; i++) {
+ result.push(`( ${chainMaker.mas[i]} )`)
+ }
+ chainMaker.mas = [];
+ return result.join('~~');
   }
 };
 
