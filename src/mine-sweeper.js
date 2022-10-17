@@ -23,11 +23,76 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+    //throw new NotImplementedError('Not implemented');
+    let newMatrix = [];
+
+    console.log(matrix);
+
+    //Проверка каждой строки внутри строки
+    for (let j = 0; j < matrix.length; j++) {
+        let mas = [];
+        for (let i = 0; i < matrix[0].length; i++) {
+            let count = 0;
+            if (matrix[j][i - 1] === true) {
+                count++;
+            } else if (matrix[j][i + 1] === true) {
+                count++;
+            }
+            mas.push(count);
+        }
+        newMatrix.push(mas);
+    }
+
+
+    //Проверка каждого столбца внутри столбца
+
+    for (let j = 0; j < matrix[0].length; j++) {
+        for (let i = 0; i < matrix.length; i++) {
+            let count = 0;
+            if (matrix[i - 1] && matrix[i - 1][j] === true) {
+                count++;
+            } else if (matrix[i + 1] && matrix[i + 1][j] === true) {
+                count++;
+            }
+            newMatrix[i][j] += count;
+        }
+    }
+
+
+    //Проверка каждой главной диагонали внутри диагонали
+
+    for (let j = 0; j < matrix[0].length; j++) {
+        for (let i = 0; i < matrix.length; i++) {
+            let count = 0;
+            if (matrix[i - 1] && matrix[i - 1][j - 1] === true) {
+                count++;
+            } else if (matrix[i + 1] && matrix[i + 1][j + 1] === true) {
+                count++;
+            }
+            newMatrix[i][j] += count;
+        }
+    }
+
+
+    //Проверка каждой дополнительной диагонали внутри диагонали
+
+    for (let j = 0; j < matrix[0].length; j++) {
+        for (let i = 0; i < matrix.length; i++) {
+            let count = 0;
+            if (matrix[i - 1] && matrix[i - 1][j + 1] === true) {
+                count++;
+            } else if (matrix[i + 1] && matrix[i + 1][j - 1] === true) {
+                count++;
+            }
+            newMatrix[i][j] += count;
+        }
+    }
+
+    return newMatrix;
+
 }
 
 module.exports = {
-  minesweeper
+    minesweeper
 };
